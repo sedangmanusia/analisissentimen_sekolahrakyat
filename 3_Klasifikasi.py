@@ -261,6 +261,9 @@ def run():
     ])
     model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
+    # Build the model to display summary correctly
+    model.build((None, maxlen))
+
     stringlist = []
     model.summary(print_fn=lambda x: stringlist.append(x))
     st.text("\n".join(stringlist))
