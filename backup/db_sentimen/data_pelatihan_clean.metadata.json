@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"4fd6d5bb16214d4fbc5dabefacee8a98","collectionName":"data_pelatihan_clean","type":"collection"}

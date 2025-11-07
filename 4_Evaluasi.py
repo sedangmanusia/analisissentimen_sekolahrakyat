@@ -10,12 +10,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 #Koneksi ke MongoDB
 @st.cache_resource
 def init_connection():
-    return pymongo.MongoClient(
-        host=st.secrets["mongo"]["host"],
-        port=st.secrets["mongo"]["port"],
-        username=st.secrets["mongo"].get("username"),
-        password=st.secrets["mongo"].get("password"),
-    )
+    return pymongo.MongoClient(st.secrets["mongo"]["uri"])
 
 def run():
     client = init_connection()

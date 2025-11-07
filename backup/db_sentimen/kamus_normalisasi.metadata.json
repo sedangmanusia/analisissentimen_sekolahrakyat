@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"7700d9ca57d74297ba401452f524be8b","collectionName":"kamus_normalisasi","type":"collection"}
