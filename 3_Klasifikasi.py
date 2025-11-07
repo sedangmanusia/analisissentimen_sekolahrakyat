@@ -319,7 +319,7 @@ def run():
         st.session_state["last_test_loss"]  = test_loss
 
         #save model + tokenizer + encoder
-        model.save("model_sentimen.h5")
+        model.save("model_sentimen.keras")
         with open("tokenizer.pkl", "wb") as f:
             pickle.dump(tokenizer, f)
 
