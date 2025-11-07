@@ -9,7 +9,7 @@ def run():
     st.title("Halaman Cek Sentimen")
 
     with st.spinner("Memuat model..."):
-        model = load_model("model_sentimen.keras")
+        model = load_model("model_sentimen_v2.keras")
 
     with open("tokenizer.pkl", "rb") as f:
         tokenizer = pickle.load(f)
