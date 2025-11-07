@@ -1,9 +1,11 @@
 import streamlit as st
 import numpy as np
 import pickle
+import json
 
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import tokenizer_from_json
 
 def run():
     st.title("Halaman Cek Sentimen")
@@ -11,8 +13,13 @@ def run():
     with st.spinner("Memuat model..."):
         model = load_model("model_sentimen.keras")
 
-    with open("tokenizer.pkl", "rb") as f:
-        tokenizer = pickle.load(f)
+    try:
+        with open("tokenizer.json", "r") as f:
+            tokenizer_json = f.read()
+        tokenizer = tokenizer_from_json(tokenizer_json)
+    except FileNotFoundError:
+        st.error("Tokenizer tidak ditemukan. Pastikan model sudah dilatih di halaman Klasifikasi.")
+        st.stop()
 
     with open("label_mapping.pkl", "rb") as f:
             maps = pickle.load(f)

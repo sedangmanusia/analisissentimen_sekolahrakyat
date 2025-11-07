@@ -24,6 +24,7 @@ from tensorflow.keras.layers import Embedding, Bidirectional, LSTM, Dense, Dropo
 from tensorflow.keras.regularizers import l2
 from tensorflow.keras.callbacks import EarlyStopping, Callback
 import pickle
+import json
 
 #inisialisasi seed
 SEED = 42
@@ -323,8 +324,9 @@ def run():
 
         #save model + tokenizer + encoder
         model.save("model_sentimen.keras")
-        with open("tokenizer.pkl", "wb") as f:
-            pickle.dump(tokenizer, f)
+        tokenizer_json = tokenizer.to_json()
+        with open("tokenizer.json", "w") as f:
+            f.write(tokenizer_json)
 
         # Simpan mapping label
         with open("label_mapping.pkl", "wb") as f:
