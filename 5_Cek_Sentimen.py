@@ -7,7 +7,6 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 def run():
     st.title("Halaman Cek Sentimen")
-    st.write("proses Cek Sentimen dengan bi lstm akan dilakukan disini")
 
     with st.spinner("Memuat model..."):
         model = load_model("model_sentimen.h5")
