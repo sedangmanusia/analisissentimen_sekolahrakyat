@@ -252,7 +252,7 @@ def run():
     #model bi lstm
     st.subheader("Arsitektur Model")
     model = Sequential([
-        Embedding(vocab_size, 64, input_length=maxlen),
+        Embedding(vocab_size, 64),
         Bidirectional(LSTM(8, return_sequences=True)),
         Bidirectional(LSTM(8)),
         Dense(8, activation="relu"),
