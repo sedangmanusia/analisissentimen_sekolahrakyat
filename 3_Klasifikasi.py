@@ -335,6 +335,10 @@ def run():
                 "reverse_mapping": reverse_mapping
             }, f)
 
+        # Simpan config maxlen
+        with open("config.json", "w") as f:
+            json.dump({"maxlen": maxlen}, f)
+
         #Simpan hasil prediksi
         y_train_pred = (model.predict(x_train) >= 0.5).astype(int).flatten()
         y_val_pred   = (model.predict(x_val) >= 0.5).astype(int).flatten()

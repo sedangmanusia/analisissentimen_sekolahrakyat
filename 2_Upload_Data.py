@@ -24,7 +24,7 @@ def run():
     def upload_save(collection_name, file_label):
         collection = db[collection_name]
 
-        st.warning("⚠️ Upload data baru akan *menghapus semua data lama* pada kategori ini setelah Anda konfirmasi.")
+        st.warning("⚠️ Upload data baru akan menghapus semua data lama pada kategori ini setelah Anda konfirmasi.")
 
         uploaded_file = st.file_uploader(f"Upload {file_label}", type=["csv"])
         if uploaded_file is not None:
