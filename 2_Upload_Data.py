@@ -34,27 +34,8 @@ def run():
 
             # Tombol simpan data
             if st.button(f"Simpan {file_label} ke Database"):
-                with st.expander("Konfirmasi Penyimpanan"):
-                    st.info(f"Anda akan menyimpan ulang {file_label}. Semua data lama pada kategori ini akan dihapus permanen.")
-                    konfirmasi = st.radio(
-                        "Apakah Anda yakin ingin melanjutkan?",
-                        ["Tidak", "Ya"], index=0, horizontal=True
-                    )
-
-                    if konfirmasi == "Ya":
-                        # Hapus semua data lama
-                        collection.delete_many({})
-
-                        # Hapus duplikat dalam file yang sama
-                        df.drop_duplicates(inplace=True)
-
-                        # Simpan data baru
-                        data = df.to_dict("records")
-                        collection.insert_many(data)
-
-                        st.success(f"{file_label} berhasil disimpan ke database (data lama telah diganti)")
-                    else:
-                        st.info("Penyimpanan dibatalkan oleh pengguna.")
+                # Buka dialog konfirmasi
+                confirm_save(collection, df, file_label)
 
         # Tampilkan data yang sudah ada
         existing_data = list(collection.find())
@@ -66,6 +47,31 @@ def run():
             st.dataframe(df_existing)
         else:
             st.info(f"Belum ada {file_label} yang tersimpan di database.")
+
+    @st.dialog("Konfirmasi Penyimpanan")
+    def confirm_save(collection, df, file_label):
+        st.write(f"Anda akan menyimpan ulang {file_label}. Semua data lama pada kategori ini akan dihapus permanen.")
+        st.write("Apakah Anda yakin ingin melanjutkan?")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Ya", use_container_width=True):
+                # Hapus semua data lama
+                collection.delete_many({})
+
+                # Hapus duplikat dalam file yang sama
+                df.drop_duplicates(inplace=True)
+
+                # Simpan data baru
+                data = df.to_dict("records")
+                collection.insert_many(data)
+
+                st.success(f"{file_label} berhasil disimpan ke database (data lama telah diganti)")
+                st.rerun()  # Tutup dialog
+        with col2:
+            if st.button("Tidak", use_container_width=True):
+                st.info("Penyimpanan dibatalkan.")
+                st.rerun()  # Tutup dialog
 
     # Pemetaan jenis data ke koleksi
     if pilih == "Data Pelatihan":
