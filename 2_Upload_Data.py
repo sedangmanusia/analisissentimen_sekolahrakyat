@@ -66,11 +66,11 @@ def run():
                 data = df.to_dict("records")
                 collection.insert_many(data)
 
-                st.success(f"{file_label} berhasil disimpan ke database (data lama telah diganti)")
+                st.toast(f"{file_label} berhasil disimpan ke database (data lama telah diganti)", icon="✅")
                 st.rerun()  # Tutup dialog
         with col2:
             if st.button("Tidak", use_container_width=True):
-                st.info("Penyimpanan dibatalkan.")
+                st.toast("Penyimpanan dibatalkan.", icon="ℹ️")
                 st.rerun()  # Tutup dialog
 
     # Pemetaan jenis data ke koleksi
